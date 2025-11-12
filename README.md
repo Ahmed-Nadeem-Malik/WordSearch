@@ -1,6 +1,6 @@
 # Word Search Performance Comparison
 
-This document summarizes three versions of a word search implementation and their performance differences, focusing on the impact of multiprocessing.
+This document summarizes three versions of a word search implementation and their performance differences, focusing on the impact of multiprocessing. Tested on python 3.14
 
 ---
 
