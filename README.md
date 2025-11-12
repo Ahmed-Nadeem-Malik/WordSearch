@@ -23,7 +23,7 @@ When we instantiate the class, we compute **all possible words**.
 ### **V3 — Multiprocessing Implementation**
 Same methodology as V2, but introduces the **`multiprocessing`** library.  
 A separate worker is assigned for each row, allowing multiple rows to be processed in parallel.  
-This was implemented to explore how **Python’s multiprocessing** compares to **C++ parallelization**.
+This was implemented to explore how **Python’s multiprocessing** compares to **C++**.
 
 ---
 
