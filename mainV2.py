@@ -1,10 +1,22 @@
+import time
+
+
+def make_grid(side: int) -> str:
+    "To make a very large grid"
+    alphabet: str = "abcdefghijklmnopqrstuvwxyz"
+    out: list[str] = []
+    for i in range(side * side):
+        out.append(alphabet[i % 26])
+    return "".join(out)
+
+
 class WordSearch:
     """
     Method adapted from v1, instead of checking that the word is at
-    that index when we are checking the word we instead do it when
-    we instatiate the class, its O(n^2) in time complexity but when
-    we actually call is_present its O(n) which is very fast but the
-    trade off is that our space complexity is O(n^2)
+    that index when we are checking the word at runtime we instead
+    do all words when we instatiate the class, so when we search
+    for a word is O(1) but at the cost of more memory for
+    all the words.
     """
 
     def __init__(self, grid: str):
@@ -18,7 +30,7 @@ class WordSearch:
         self.valid_words: set[str] = set()
         self.all_words()
 
-    def vertical_words(self, idx: int, length: int) -> str:
+    def vertical_word(self, idx: int, length: int) -> str:
         """Adds word going down starting from index to index + length"""
         if (idx // self.n) + length > self.n:
             return ""
@@ -34,7 +46,7 @@ class WordSearch:
 
         return "".join(word_chars)
 
-    def horizontal_words(self, idx: int, length: int) -> str:
+    def horizontal_word(self, idx: int, length: int) -> str:
         """Adds word going right starting from index to index + length"""
         if (idx % self.n) + length > self.n:
             return ""
@@ -45,11 +57,11 @@ class WordSearch:
         """Adds a word incrementally from a index to length by going right and down"""
         for idx in range(len(self.grid)):
             for length in range(4, 21):
-                word: str = self.horizontal_words(idx, length)
+                word: str = self.horizontal_word(idx, length)
                 if word:
                     self.valid_words.add(word)
 
-                word = self.vertical_words(idx, length)
+                word: str = self.vertical_word(idx, length)
                 if word:
                     self.valid_words.add(word)
 
@@ -87,6 +99,11 @@ if __name__ == "__main__":
     # s t u v w x y z a b
     # c d e f g h i j k l
     # m n o p q r s t u v
+
+    start = time.perf_counter()
+    wsTest = WordSearch(make_grid(2000))
+    end = time.perf_counter()
+    print("Word set build time ", end - start, "seconds")
 
     ws = WordSearch(test_grid)
 

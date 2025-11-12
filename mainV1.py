@@ -1,10 +1,3 @@
-"""
-Initial solution:
-Make a hashmap for every character to indec then iterate through those index's via a dfs down and right
-thought that for a very large input maybe precomputing the words is better
-"""
-
-
 class WordSearch:
     def __init__(self, grid: str):
         self.grid: str = grid
@@ -14,8 +7,13 @@ class WordSearch:
 
         self.n: int = n
 
+        self.chToIdx: dict[str, list[int]] = {}
+        for idx, ch in enumerate(grid):
+            if ch not in self.chToIdx:
+                self.chToIdx[ch] = []
+            self.chToIdx[ch].append(idx)
+
     def is_vertical(self, idx: int, word: str) -> bool:
-        """Checks the vertical"""
         if (idx // self.n) + len(word) > self.n:
             return False
 
@@ -32,69 +30,54 @@ class WordSearch:
         return True
 
     def is_horizontal(self, idx: int, word: str) -> bool:
-        "Checks the horizontal"
         if (idx % self.n) + len(word) > self.n:
             return False
 
         gridPtr: int = idx
         if self.grid[gridPtr : gridPtr + len(word)] == word:
             return True
-
         return False
 
     def is_present(self, word: str) -> bool:
-        "Checks whether that the word is in the grid"
-        if not word or len(word) < 4 or len(word) > 20:
+        if not word:
             return False
 
-        for idx in range(len(self.grid)):
+        first = word[0]
+        if first not in self.chToIdx:
+            return False
+
+        for idx in self.chToIdx[first]:
             if self.is_vertical(idx, word) or self.is_horizontal(idx, word):
                 return True
-
         return False
 
 
-if __name__ == "__main__":
-    # Made via python script:
-    test_grid = (
-        "abcdefghij"
-        "klmnopqrst"
-        "uvwxyzabcd"
-        "efghijklmn"
-        "opqrstuvwx"
-        "yzabcdefgh"
-        "ijklmnopqr"
-        "stuvwxyzab"
-        "cdefghijkl"
-        "mnopqrstuv"
-    )
+grid: str = "kdsaaajflaaaakdaaajflaaaasdaaajfaaaa"
+"""
+kdsaaa
+jflaaa
+akdaaa
+jflaaa
+asdaaa
+jfaaaa
+"""
+"""
+len(grid) = 36
+COLS == 6
+ROWS == 6
 
-    # Grid layout:
-    # a b c d e f g h i j
-    # k l m n o p q r s t
-    # u v w x y z a b c d
-    # e f g h i j k l m n
-    # o p q r s t u v w x
-    # y z a b c d e f g h
-    # i j k l m n o p q r
-    # s t u v w x y z a b
-    # c d e f g h i j k l
-    # m n o p q r s t u v
+if we are going down case for kfs
+13 to 19 to 25
+check whether its in bounds 
 
-    ws = WordSearch(test_grid)
+if we are going across for fla
+18 to 19 to 20 make sure we are in the same column
 
-    print("Testing horizontal words")
-    assert ws.is_present("abcdefgh"), "'abcdefgh' should be present (first row)"
-    assert ws.is_present("klmnopqr"), "'klmnopqr' should be present (second row)"
-    assert ws.is_present("uvwxyzab"), "'uvwxyzab' should be present (third row)"
+18 // 6
 
-    print("Testing vertical words")
-    assert ws.is_present("akueoyiscm"), "'akueoyiscm' should be present (first column)"
-    assert ws.is_present("blvfpzjtdn"), "'blvfpzjtdn' should be present (second column)"
-
-    print("Testing invalid cases")
-    assert not ws.is_present("abc"), "'abc' should not be present (too short, min 4)"
-    assert ws.is_present("ghijklmn"), "'ghijklmn' should be present (exists in row 3)"
-    assert ws.is_present("wxyz"), "'wxyz' should be present (exists in multiple places)"
-
-    print("All tests passed!")
+"""
+words_to_find = ["add", "aaa", "lda", "jaj"]
+ws = WordSearch(grid)
+for word in words_to_find:
+    if ws.is_present(word):
+        print(f"found {word}")
