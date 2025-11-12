@@ -41,3 +41,7 @@ For the larger grid:
 
 ## Conclusion
 The multiprocessing library must have some overhead that can make the results take longer for smaller grids, but as we increase the size of the grid it can be a lot faster, such as a 10x speedup in this case.
+
+
+## References
+Multiprocessing: https://superfastpython.com/multiprocessing-pool-python/
