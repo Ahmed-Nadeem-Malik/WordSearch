@@ -2,7 +2,7 @@ import time
 
 
 def make_grid(side: int) -> str:
-    "To make a very large grid"
+    """To make a very large grid"""
     alphabet: str = "abcdefghijklmnopqrstuvwxyz"
     out: list[str] = []
     for i in range(side * side):
@@ -66,7 +66,7 @@ class WordSearch:
                     self.valid_words.add(word)
 
     def is_present(self, word: str) -> bool:
-        "Checks whether that the word is in the grid"
+        """Checks whether that the word is in the grid"""
         if not word or len(word) < 4 or len(word) > 20:
             return False
 
