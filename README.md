@@ -57,7 +57,7 @@ Two test cases were run:
 
 ## Conclusion
 The **multiprocessing library** introduces overhead that causes slower performance on smaller grids.  
-However, as the grid size increases, multiprocessing becomes significantly more efficient — achieving about a **10× speedup** in this case.
+However, as the grid size increases, multiprocessing becomes significantly more efficient, achieving about a **10× speedup** in this case.
 
 ---
 
