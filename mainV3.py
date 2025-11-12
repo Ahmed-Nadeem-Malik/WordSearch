@@ -1,36 +1,3 @@
-"""
-Same as V2 but more as a case study to see how multicore helps
-with speed of the word-set initialization which is our most
-time-consuming set.
-
-Moved functions outside the class because they conflicted with
-the multiprocessing library.
-
-First we make workers. Then for each row we allocate a worker
-that does the processing like before. We can do multiple rows at
-the same time since it is multiprocessing so it should be faster.
-
-Results:
-For the original grid used for testing:
-V2: 0.0003752919983526226 seconds
-V3: 0.0737524169999233 seconds
-There is a slowdown here. This is likely the multiprocessing overhead.
-As input size increases the V3 overhead should become minimal and
-performance should improve.
-
-For the large grid made by make_grid:
-V2: 47.72359229200083 seconds
-V3: 4.3694680410008 seconds
-This is about a 10x speedup. Larger inputs benefit from multiprocessing.
-
-Conclusion:
-Large grid: use multiprocessing.
-Small grid: use the basic version.
-
-References:
-Multiprocessing: https://superfastpython.com/multiprocessing-pool-python/
-"""
-
 from multiprocessing import Pool, cpu_count
 import time
 
