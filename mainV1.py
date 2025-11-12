@@ -14,6 +14,7 @@ class WordSearch:
             self.chToIdx[ch].append(idx)
 
     def is_vertical(self, idx: int, word: str) -> bool:
+        """Checks whether at that index we have a vertical word"""
         if (idx // self.n) + len(word) > self.n:
             return False
 
@@ -30,6 +31,7 @@ class WordSearch:
         return True
 
     def is_horizontal(self, idx: int, word: str) -> bool:
+        """Checks whether at that index we have a horizontal word"""
         if (idx % self.n) + len(word) > self.n:
             return False
 
@@ -39,6 +41,7 @@ class WordSearch:
         return False
 
     def is_present(self, word: str) -> bool:
+        """Checks whether word is in the grid"""
         if not word:
             return False
 
