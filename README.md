@@ -14,8 +14,8 @@ First version made before a better solution was realized.
 
 ### **V2 — Precomputed Words**
 When we instantiate the class, we compute **all possible words**.  
-- Lookup time: **O(1)**  
-- Compute time for the wordset: **High**  
+- Lookup time for a specific word: **O(1)**  
+- Compute time for the word set: **High**  
 - Space complexity: **High**, since all possible words are stored.
 
 ---
