@@ -1,19 +1,29 @@
+# Word Search Performance Comparison
+
+This document summarizes three versions of a word search implementation and their performance differences, focusing on the impact of multiprocessing.
+
+---
+
 ## Version Summaries
 
----
-
-### V1
-At each index we search left and down if we have a first character match. First version made before i realised a better solution
-
----
-
-### V2
-When we instantiate the class we compute all possible words. This means lookup of a word is O(1), however the compute time for the words is quite large. Also, the space complexity is quite large as it’s all possible words.
+### **V1 — Basic Search**
+At each index, we search **left** and **down** if we have a first character match.  
+First version made before a better solution was realized.
 
 ---
 
-### V3
-Same methodology as V2 but we introduce the multiprocessing library, which we use when computing the word set. We assign a worker for each row that processes that row while other rows are processed at the same time. This was just implemented because I wanted to see how Python differs from C++ in the context of multiprocessing.
+### **V2 — Precomputed Words**
+When we instantiate the class, we compute **all possible words**.  
+- Lookup time: **O(1)**  
+- Compute time: **High**  
+- Space complexity: **High**, since all possible words are stored.
+
+---
+
+### **V3 — Multiprocessing Implementation**
+Same methodology as V2, but introduces the **`multiprocessing`** library.  
+A separate worker is assigned for each row, allowing multiple rows to be processed in parallel.  
+This was implemented to explore how **Python’s multiprocessing** compares to **C++ parallelization**.
 
 ---
 
@@ -23,25 +33,33 @@ Multiprocessing should be faster.
 ---
 
 ## Test Cases
-Small and large grid.
+Two test cases were run:  
+- Small grid  
+- Large grid  
 
 ---
 
 ## Results
 
-For the original grid used for testing:  
-**V2:** 0.0003752919983526226 seconds  
-**V3:** 0.0737524169999233 seconds  
+### Original Grid
+| Version | Time (seconds) |
+|----------|----------------|
+| V2 | 0.0003752919983526226 |
+| V3 | 0.0737524169999233 |
 
-For the larger grid:  
-**V2:** 47.72359229200083 seconds  
-**V3:** 4.3694680410008 seconds  
+### Large Grid
+| Version | Time (seconds) |
+|----------|----------------|
+| V2 | 47.72359229200083 |
+| V3 | 4.3694680410008 |
 
 ---
 
 ## Conclusion
-The multiprocessing library must have some overhead that can make the results take longer for smaller grids, but as we increase the size of the grid it can be a lot faster, such as a 10x speedup in this case.
+The **multiprocessing library** introduces overhead that causes slower performance on smaller grids.  
+However, as the grid size increases, multiprocessing becomes significantly more efficient — achieving about a **10× speedup** in this case.
 
+---
 
 ## References
-Multiprocessing: https://superfastpython.com/multiprocessing-pool-python/
+- [Multiprocessing in Python](https://superfastpython.com/multiprocessing-pool-python/)
