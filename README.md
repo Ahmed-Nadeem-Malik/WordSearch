@@ -3,7 +3,7 @@
 ---
 
 ### V1
-At each index we search left and down if we have a first character match.
+At each index we search left and down if we have a first character match. First version made before i realised a better solution
 
 ---
 
