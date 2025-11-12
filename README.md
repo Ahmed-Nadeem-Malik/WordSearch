@@ -1,10 +1,16 @@
 ## Version Summaries
 
+---
+
 ### V1
 At each index we search left and down if we have a first character match.
 
+---
+
 ### V2
 When we instantiate the class we compute all possible words. This means lookup of a word is O(1), however the compute time for the words is quite large. Also, the space complexity is quite large as it’s all possible words.
+
+---
 
 ### V3
 Same methodology as V2 but we introduce the multiprocessing library, which we use when computing the word set. We assign a worker for each row that processes that row while other rows are processed at the same time. This was just implemented because I wanted to see how Python differs from C++ in the context of multiprocessing.
