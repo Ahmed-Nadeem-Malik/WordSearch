@@ -28,8 +28,8 @@ This was implemented to explore how **Python’s multiprocessing** compares to *
 ---
 
 ### **V4 — Multithreading Implementation**
-Same methodology as V£, but introduces the **`multithreading`** .  
-Wanted to see the GIL being removed in python 14.
+Same methodology as V3, but introduces the **`multithreading`** .  
+Wanted to see the perfomance of GIL being removed in python 14.
 
 ---
 
