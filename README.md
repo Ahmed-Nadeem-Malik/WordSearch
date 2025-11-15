@@ -27,8 +27,16 @@ This was implemented to explore how **Python’s multiprocessing** compares to *
 
 ---
 
+### **V4 — Multithreading Implementation**
+Same methodology as V£, but introduces the **`multithreading`** .  
+Wanted to see the GIL being removed in python 14.
+
+---
+
 ## Hypothesis
 Multiprocessing should be faster.
+Multithreading should be faster that multiprocessing. 
+
 
 ---
 
@@ -46,18 +54,30 @@ Two test cases were run:
 |----------|----------------|
 | V2 | 0.0003752919983526226 |
 | V3 | 0.0737524169999233 |
+| V4 | 0.014568999991752207 |
+
 
 ### Large Grid
 | Version | Time (seconds) |
 |----------|----------------|
 | V2 | 47.72359229200083 |
 | V3 | 4.3694680410008 |
+| V4 | 5.93039658400812 | 
 
 ---
 
 ## Conclusion
 The **multiprocessing library** introduces overhead that causes slower performance on smaller grids.  
-However, as the grid size increases, multiprocessing becomes significantly more efficient — achieving about a **10× speedup** in this case.
+However, as the grid size increases, multiprocessing becomes significantly more efficient, achieving about a **10× speedup** in this case.
+
+---
+
+## Conclusion edit after adding multithreading
+
+Thought that this would be faster than V3 for large grids as there is not context switch but results show otherwise.
+This may be due to GIL limitations as its still in the process of beign removed. However something interesting is that 
+its faster than V3 in smaller grids so maybe the context switch overhead is much more significant in smaller grids but
+as the grid is larger its much less significant and a full process may be much more performant than a thread.
 
 ---
 
