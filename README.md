@@ -69,7 +69,7 @@ Two test cases were run:
 ## Conclusion
 The **multiprocessing library** introduces overhead that causes slower performance on smaller grids.  
 However, as the grid size increases, multiprocessing becomes significantly more efficient, achieving about a **10× speedup** in this case.
-<<<<<<< HEAD
+
 
 ---
 
@@ -79,8 +79,6 @@ Thought that this would be faster than V3 for large grids as there is not contex
 This may be due to GIL limitations as its still in the process of beign removed. However something interesting is that 
 its faster than V3 in smaller grids so maybe the context switch overhead is much more significant in smaller grids but
 as the grid is larger its much less significant and a full process may be much more performant than a thread.
-=======
->>>>>>> refs/remotes/origin/main
 
 ---
 
