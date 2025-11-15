@@ -1,4 +1,4 @@
-# Word Search Performance Comparison
+# Word Search 
 
 This document summarizes three versions of a word search implementation and their performance differences, focusing on the impact of multiprocessing. Tested on python 3.14
 
@@ -13,9 +13,9 @@ First version made before a better solution was realized.
 ---
 
 ### **V2 — Precomputed Words**
-When we instantiate the class, we compute **all possible words**.  
-- Lookup time: **O(1)**  
-- Compute time: **High**  
+When we instantiate the class, we compute **all possible words**, which means that looking up of a word is really fast.  
+- Lookup time for a specific word: **O(1)**  
+- Compute time for the word set: **High**  
 - Space complexity: **High**, since all possible words are stored.
 
 ---
@@ -23,7 +23,7 @@ When we instantiate the class, we compute **all possible words**.
 ### **V3 — Multiprocessing Implementation**
 Same methodology as V2, but introduces the **`multiprocessing`** library.  
 A separate worker is assigned for each row, allowing multiple rows to be processed in parallel.  
-This was implemented to explore how **Python’s multiprocessing** compares to **C++ parallelization**.
+This was implemented to explore how **Python’s multiprocessing** compares to **C++**.
 
 ---
 
@@ -69,6 +69,7 @@ Two test cases were run:
 ## Conclusion
 The **multiprocessing library** introduces overhead that causes slower performance on smaller grids.  
 However, as the grid size increases, multiprocessing becomes significantly more efficient, achieving about a **10× speedup** in this case.
+<<<<<<< HEAD
 
 ---
 
@@ -78,6 +79,8 @@ Thought that this would be faster than V3 for large grids as there is not contex
 This may be due to GIL limitations as its still in the process of beign removed. However something interesting is that 
 its faster than V3 in smaller grids so maybe the context switch overhead is much more significant in smaller grids but
 as the grid is larger its much less significant and a full process may be much more performant than a thread.
+=======
+>>>>>>> refs/remotes/origin/main
 
 ---
 
